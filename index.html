@@ -309,21 +309,27 @@
     <script>
       let matchingLines = [];
 
-      // --- Lógica para la búsqueda de palabras clave ---
-      document
-        .getElementById("searchBtn")
-        .addEventListener("click", function () {
-          const fileInput = document.getElementById("fileInput");
-          const keyword = document
-            .getElementById("keywordInput")
-            .value.trim()
-            .toLowerCase();
-          const outputFileName = document
-            .getElementById("outputFileNameInput")
-            .value.trim();
+      // --- Referencias a elementos HTML (se obtienen una sola vez) ---
+      const fileInput = document.getElementById("fileInput");
+      const keywordInput = document.getElementById("keywordInput");
+      const outputFileNameInput = document.getElementById("outputFileNameInput");
+      const searchBtn = document.getElementById("searchBtn");
+      const clearSearchBtn = document.getElementById("clearSearchBtn");
+      const resultsDiv = document.getElementById("results");
+      const downloadSection = document.getElementById("downloadSection");
+      const downloadBtn = document.getElementById("downloadBtn");
 
-          const resultsDiv = document.getElementById("results");
-          const searchBtn = document.getElementById("searchBtn");
+      const deduplicateFileInput = document.getElementById("deduplicateFileInput");
+      const outputDeduplicateFileNameInput = document.getElementById("outputDeduplicateFileNameInput");
+      const deduplicateBtn = document.getElementById("deduplicateBtn");
+      const clearDeduplicateBtn = document.getElementById("clearDeduplicateBtn");
+      const deduplicateResultsDiv = document.getElementById("deduplicateResults");
+
+
+      // --- Lógica para la búsqueda de palabras clave ---
+      searchBtn.addEventListener("click", function () {
+          const keyword = keywordInput.value.trim().toLowerCase();
+          const outputFileName = outputFileNameInput.value.trim();
 
           if (!fileInput.files[0]) {
             resultsDiv.innerHTML =
@@ -363,8 +369,8 @@
                   )
                   .join("");
 
-              document.getElementById("downloadSection").style.display = "block";
-              document.getElementById("downloadBtn").onclick = function () {
+              downloadSection.style.display = "block";
+              downloadBtn.onclick = function () {
                 const blob = new Blob([matchingLines.join("\n")], {
                   type: "text/plain",
                 });
@@ -389,11 +395,12 @@
             } else {
               resultsDiv.innerHTML =
                 '<p class="text-yellow-500 text-center"><i class="fas fa-search-minus mr-2"></i>No se encontraron líneas que contengan la palabra clave.</p>';
-              document.getElementById("downloadSection").style.display = "none";
+              downloadSection.style.display = "none";
             }
 
             searchBtn.disabled = false;
             searchBtn.innerHTML = '<i class="fas fa-search mr-2"></i>Buscar';
+            toggleButton(); // Re-evaluar el estado de los botones después de la búsqueda
           };
 
           reader.onerror = function () {
@@ -401,50 +408,43 @@
               '<p class="text-red-500 text-center"><i class="fas fa-exclamation-triangle mr-2"></i>Error al leer el archivo.</p>';
             searchBtn.disabled = false;
             searchBtn.innerHTML = '<i class="fas fa-search mr-2"></i>Buscar';
-            document.getElementById("downloadSection").style.display = "none";
+            downloadSection.style.display = "none";
+            toggleButton(); // Re-evaluar el estado de los botones después de un error
           };
 
           reader.readAsText(file);
         });
 
       // --- Lógica para habilitar/deshabilitar el botón de búsqueda y borrar resultados de búsqueda ---
-      const fileInput = document.getElementById("fileInput");
-      const keywordInput = document.getElementById("keywordInput");
-      const searchBtn = document.getElementById("searchBtn");
-      const clearSearchBtn = document.getElementById("clearSearchBtn");
-
       function toggleButton() {
         const fileSelected = fileInput.files.length > 0;
         const keywordEntered = keywordInput.value.trim() !== "";
+        
+        // Habilitar/deshabilitar el botón de búsqueda
         searchBtn.disabled = !(fileSelected && keywordEntered);
         
         // Habilitar/deshabilitar el botón de borrar resultados de búsqueda
-        clearSearchBtn.disabled = !(fileSelected || keywordEntered || document.getElementById("results").innerHTML.includes("Líneas encontradas"));
+        // Se habilita si hay un archivo, una palabra clave, o si ya hay resultados mostrados
+        clearSearchBtn.disabled = !(fileSelected || keywordEntered || resultsDiv.innerHTML.includes("Líneas encontradas") || resultsDiv.innerHTML.includes("No se encontraron líneas") || resultsDiv.innerHTML.includes("Error al leer el archivo"));
       }
 
       fileInput.addEventListener("change", toggleButton);
       keywordInput.addEventListener("input", toggleButton);
 
       // --- Lógica para el botón "Borrar Resultados" de la sección de búsqueda ---
-      document.getElementById("clearSearchBtn").addEventListener("click", function() {
-          document.getElementById("results").innerHTML = '<p class="text-gray-500 text-center">Los resultados aparecerán aquí...</p>';
-          document.getElementById("downloadSection").style.display = "none";
+      clearSearchBtn.addEventListener("click", function() {
+          resultsDiv.innerHTML = '<p class="text-gray-500 text-center">Los resultados aparecerán aquí...</p>';
+          downloadSection.style.display = "none";
           fileInput.value = ""; // Limpiar el input de archivo
           keywordInput.value = ""; // Limpiar el input de palabra clave
-          document.getElementById("outputFileNameInput").value = ""; // Limpiar el input del nombre de archivo de salida
+          outputFileNameInput.value = ""; // Limpiar el input del nombre de archivo de salida
           toggleButton(); // Re-evaluar el estado de los botones
       });
 
 
       // --- LÓGICA PARA ELIMINAR DUPLICADOS ---
-      document.getElementById("deduplicateBtn").addEventListener("click", function () {
-        const deduplicateFileInput = document.getElementById("deduplicateFileInput");
-        const deduplicateResultsDiv = document.getElementById("deduplicateResults");
-        const deduplicateBtn = document.getElementById("deduplicateBtn");
-        // Obtener el nombre de archivo deseado por el usuario para la deduplicación
-        const outputDeduplicateFileName = document
-            .getElementById("outputDeduplicateFileNameInput")
-            .value.trim();
+      deduplicateBtn.addEventListener("click", function () {
+        const outputDeduplicateFileName = outputDeduplicateFileNameInput.value.trim();
 
         if (!deduplicateFileInput.files[0]) {
           deduplicateResultsDiv.innerHTML =
@@ -495,9 +495,4 @@
                 </button>
               </div>`;
 
-            document.getElementById("downloadUniqueBtn").onclick = function () {
-              const blob = new Blob([finalUniqueLines.join("\n")], {
-                type: "text/plain",
-              });
-              const url = URL.createObjectURL(blob);
-      
+            document.getElementB
