@@ -87,6 +87,24 @@
         />
       </div>
 
+      <!-- NUEVA CASILLA PARA EL NOMBRE DEL ARCHIVO -->
+      <div class="mb-6">
+        <label
+          for="outputFileNameInput"
+          class="block text-sm font-medium text-gray-700 mb-2 flex items-center"
+        >
+          <i class="fas fa-file-export mr-2 text-purple-500"></i> Nombre del archivo de resultados (opcional):
+        </label>
+        <input
+          type="text"
+          id="outputFileNameInput"
+          placeholder="Ej: mis_resultados_filtrados"
+          class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition duration-300"
+        />
+        <p class="text-gray-500 text-xs mt-1">Si no se especifica, se usará un nombre por defecto.</p>
+      </div>
+      <!-- FIN NUEVA CASILLA -->
+
       <div class="flex justify-center mb-6">
         <button
           id="searchBtn"
@@ -144,6 +162,11 @@
             .getElementById("keywordInput")
             .value.trim()
             .toLowerCase();
+          // Obtener el nombre de archivo deseado por el usuario
+          const outputFileName = document
+            .getElementById("outputFileNameInput")
+            .value.trim();
+
           const resultsDiv = document.getElementById("results");
           const searchBtn = document.getElementById("searchBtn");
 
@@ -193,7 +216,19 @@
                 const url = URL.createObjectURL(blob);
                 const a = document.createElement("a");
                 a.href = url;
-                a.download = "resultados_busqueda.txt";
+
+                // Determinar el nombre del archivo de descarga
+                let finalFileName = "resultados_ULPCHK.txt"; // Nombre por defecto
+                if (outputFileName) {
+                  // Si el usuario proporcionó un nombre, usarlo y asegurar la extensión .txt
+                  finalFileName = outputFileName.endsWith(".txt") ? outputFileName : `${outputFileName}.txt`;
+                } else if (keyword) {
+                  // Si no hay nombre personalizado, pero sí palabra clave, usarla
+                  finalFileName = `resultados_ULPCHK_${keyword}.txt`;
+                }
+                
+                a.download = finalFileName; // Asignar el nombre final
+                
                 document.body.appendChild(a);
                 a.click();
                 document.body.removeChild(a);
@@ -223,6 +258,7 @@
       // Enable button only when file is selected and keyword is entered
       document.getElementById("fileInput").addEventListener("change", toggleButton);
       document.getElementById("keywordInput").addEventListener("input", toggleButton);
+      // No es necesario que el campo de nombre de archivo afecte la habilitación del botón de búsqueda
 
       function toggleButton() {
         const fileSelected = document.getElementById("fileInput").files.length > 0;
@@ -231,6 +267,4 @@
       }
     </script>
 </body>
-</html>
-</content>
-</create_file>
+    </html>
