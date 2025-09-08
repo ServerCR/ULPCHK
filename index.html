@@ -87,7 +87,7 @@
         />
       </div>
 
-      <!-- NUEVA CASILLA PARA EL NOMBRE DEL ARCHIVO -->
+      <!-- CASILLA PARA EL NOMBRE DEL ARCHIVO DE RESULTADOS DE BÚSQUEDA -->
       <div class="mb-6">
         <label
           for="outputFileNameInput"
@@ -103,7 +103,7 @@
         />
         <p class="text-gray-500 text-xs mt-1">Si no se especifica, se usará un nombre por defecto.</p>
       </div>
-      <!-- FIN NUEVA CASILLA -->
+      <!-- FIN CASILLA -->
 
       <div class="flex justify-center mb-6">
         <button
@@ -131,6 +131,64 @@
       </div>
     </div>
 
+    <!-- SECCIÓN PARA ELIMINAR DUPLICADOS -->
+    <div
+      class="bg-white rounded-xl shadow-2xl p-10 max-w-3xl w-full mt-8"
+    >
+      <div class="text-center mb-8">
+        <i class="fas fa-eraser hero-icon" style="color: #ef4444;"></i>
+        <h2 class="text-3xl font-bold text-gray-800 mb-2">Eliminar Duplicados</h2>
+        <p class="text-gray-600">Sube un archivo TXT para eliminar líneas duplicadas.</p>
+      </div>
+
+      <div class="mb-6">
+        <label
+          for="deduplicateFileInput"
+          class="block text-sm font-medium text-gray-700 mb-2 flex items-center"
+        >
+          <i class="fas fa-file-upload mr-2 text-red-500"></i> Selecciona un archivo TXT para limpiar:
+        </label>
+        <input
+          type="file"
+          id="deduplicateFileInput"
+          accept=".txt"
+          class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-red-50 file:text-red-700 hover:file:bg-red-100 transition duration-300"
+        />
+      </div>
+
+      <!-- CASILLA PARA EL NOMBRE DEL ARCHIVO DE RESULTADOS DE DUPLICADOS -->
+      <div class="mb-6">
+        <label
+          for="outputDeduplicateFileNameInput"
+          class="block text-sm font-medium text-gray-700 mb-2 flex items-center"
+        >
+          <i class="fas fa-file-signature mr-2 text-orange-500"></i> Nombre del archivo limpio (opcional):
+        </label>
+        <input
+          type="text"
+          id="outputDeduplicateFileNameInput"
+          placeholder="Ej: mi_lista_limpia"
+          class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition duration-300"
+        />
+        <p class="text-gray-500 text-xs mt-1">Si no se especifica, se usará un nombre por defecto.</p>
+      </div>
+      <!-- FIN CASILLA -->
+
+      <div class="flex justify-center mb-6">
+        <button
+          id="deduplicateBtn"
+          class="bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700 text-white font-bold py-3 px-8 rounded-lg transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-105"
+        >
+          <i class="fas fa-magic mr-2"></i>Limpiar Duplicados
+        </button>
+      </div>
+
+      <div id="deduplicateResults" class="bg-gray-50 p-4 rounded-md min-h-32 border border-gray-200">
+        <p class="text-gray-500 text-center">Los resultados de la limpieza aparecerán aquí...</p>
+      </div>
+    </div>
+    <!-- FIN SECCIÓN DUPLICADOS -->
+
     <div class="credit" title="Diseño y desarrollo por falco(@ghost10080)">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -154,6 +212,7 @@
     <script>
       let matchingLines = [];
 
+      // --- Lógica para la búsqueda de palabras clave ---
       document
         .getElementById("searchBtn")
         .addEventListener("click", function () {
@@ -162,7 +221,6 @@
             .getElementById("keywordInput")
             .value.trim()
             .toLowerCase();
-          // Obtener el nombre de archivo deseado por el usuario
           const outputFileName = document
             .getElementById("outputFileNameInput")
             .value.trim();
@@ -217,17 +275,14 @@
                 const a = document.createElement("a");
                 a.href = url;
 
-                // Determinar el nombre del archivo de descarga
-                let finalFileName = "resultados_ULPCHK.txt"; // Nombre por defecto
+                let finalFileName = "resultados_ULPCHK.txt";
                 if (outputFileName) {
-                  // Si el usuario proporcionó un nombre, usarlo y asegurar la extensión .txt
                   finalFileName = outputFileName.endsWith(".txt") ? outputFileName : `${outputFileName}.txt`;
                 } else if (keyword) {
-                  // Si no hay nombre personalizado, pero sí palabra clave, usarla
                   finalFileName = `resultados_ULPCHK_${keyword}.txt`;
                 }
                 
-                a.download = finalFileName; // Asignar el nombre final
+                a.download = finalFileName;
                 
                 document.body.appendChild(a);
                 a.click();
@@ -255,16 +310,123 @@
           reader.readAsText(file);
         });
 
-      // Enable button only when file is selected and keyword is entered
+      // --- Lógica para habilitar/deshabilitar el botón de búsqueda ---
       document.getElementById("fileInput").addEventListener("change", toggleButton);
       document.getElementById("keywordInput").addEventListener("input", toggleButton);
-      // No es necesario que el campo de nombre de archivo afecte la habilitación del botón de búsqueda
 
       function toggleButton() {
         const fileSelected = document.getElementById("fileInput").files.length > 0;
         const keywordEntered = document.getElementById("keywordInput").value.trim() !== "";
         document.getElementById("searchBtn").disabled = !(fileSelected && keywordEntered);
       }
+
+      // --- LÓGICA PARA ELIMINAR DUPLICADOS ---
+      document.getElementById("deduplicateBtn").addEventListener("click", function () {
+        const deduplicateFileInput = document.getElementById("deduplicateFileInput");
+        const deduplicateResultsDiv = document.getElementById("deduplicateResults");
+        const deduplicateBtn = document.getElementById("deduplicateBtn");
+        // Obtener el nombre de archivo deseado por el usuario para la deduplicación
+        const outputDeduplicateFileName = document
+            .getElementById("outputDeduplicateFileNameInput")
+            .value.trim();
+
+        if (!deduplicateFileInput.files[0]) {
+          deduplicateResultsDiv.innerHTML =
+            '<p class="text-red-500 text-center"><i class="fas fa-exclamation-triangle mr-2"></i>Por favor, selecciona un archivo TXT para eliminar duplicados.</p>';
+          return;
+        }
+
+        deduplicateBtn.disabled = true;
+        deduplicateBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Limpiando...';
+
+        const file = deduplicateFileInput.files[0];
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+          const text = e.target.result;
+          const lines = text.split("\n");
+          
+          const originalLines = []; // Para almacenar todas las líneas originales (no vacías)
+          const uniqueNormalizedLines = new Set(); // Para almacenar las versiones normalizadas únicas
+          const finalUniqueLines = []; // Para almacenar las líneas únicas en su formato original
+
+          lines.forEach(line => {
+            const trimmedLine = line.trim();
+            if (trimmedLine === '') { // Ignorar líneas completamente vacías
+                return;
+            }
+            originalLines.push(line); // Guardar la línea original para el conteo
+            const normalizedLine = trimmedLine.toLowerCase(); // Normalizar para comparación
+
+            if (!uniqueNormalizedLines.has(normalizedLine)) {
+              uniqueNormalizedLines.add(normalizedLine);
+              finalUniqueLines.push(line); // Añadir la línea original si su versión normalizada es única
+            }
+          });
+
+          const originalCount = originalLines.length; // Contar las líneas no vacías originales
+          const uniqueCount = finalUniqueLines.length;
+          const removedCount = originalCount - uniqueCount;
+
+          if (uniqueCount > 0) {
+            deduplicateResultsDiv.innerHTML =
+              `<h3 class="text-lg font-semibold mb-4 text-gray-800 flex items-center"><i class="fas fa-check-circle mr-2 text-green-500"></i>Proceso Completado:</h3>
+              <p class="text-gray-700 mb-2">Líneas originales (no vacías): <span class="font-bold">${originalCount}</span></p>
+              <p class="text-gray-700 mb-4">Líneas únicas: <span class="font-bold">${uniqueCount}</span> (Se eliminaron <span class="font-bold text-red-600">${removedCount}</span> duplicados)</p>
+              <div class="text-center">
+                <button id="downloadUniqueBtn" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-lg transition duration-300">
+                  <i class="fas fa-download mr-2"></i>Descargar Archivo Limpio
+                </button>
+              </div>`;
+
+            document.getElementById("downloadUniqueBtn").onclick = function () {
+              const blob = new Blob([finalUniqueLines.join("\n")], {
+                type: "text/plain",
+              });
+              const url = URL.createObjectURL(blob);
+              const a = document.createElement("a");
+              a.href = url;
+              
+              // Determinar el nombre del archivo de descarga para deduplicados
+              let finalDeduplicateFileName = `ULPCHK_limpio_${file.name.replace(/\.txt$/i, '')}.txt`; // Nombre por defecto
+              if (outputDeduplicateFileName) {
+                // Si el usuario proporcionó un nombre, usarlo y asegurar la extensión .txt
+                finalDeduplicateFileName = outputDeduplicateFileName.endsWith(".txt") ? outputDeduplicateFileName : `${outputDeduplicateFileName}.txt`;
+              }
+              
+              a.download = finalDeduplicateFileName;
+              
+              document.body.appendChild(a);
+              a.click();
+              document.body.removeChild(a);
+              URL.revokeObjectURL(url);
+            };
+          } else {
+            deduplicateResultsDiv.innerHTML =
+              '<p class="text-yellow-500 text-center"><i class="fas fa-info-circle mr-2"></i>El archivo está vacío o no contiene líneas válidas después de la limpieza.</p>';
+          }
+
+          deduplicateBtn.disabled = false;
+          deduplicateBtn.innerHTML = '<i class="fas fa-magic mr-2"></i>Limpiar Duplicados';
+        };
+
+        reader.onerror = function () {
+          deduplicateResultsDiv.innerHTML =
+            '<p class="text-red-500 text-center"><i class="fas fa-exclamation-triangle mr-2"></i>Error al leer el archivo.</p>';
+          deduplicateBtn.disabled = false;
+          deduplicateBtn.innerHTML = '<i class="fas fa-magic mr-2"></i>Limpiar Duplicados';
+        };
+
+        reader.readAsText(file);
+      });
+
+      // Habilitar/deshabilitar el botón de deduplicación
+      document.getElementById("deduplicateFileInput").addEventListener("change", function() {
+        document.getElementById("deduplicateBtn").disabled = this.files.length === 0;
+      });
+      // Inicialmente deshabilitar el botón de deduplicación
+      document.getElementById("deduplicateBtn").disabled = true;
+
     </script>
 </body>
-    </html>
+</html>
