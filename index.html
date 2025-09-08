@@ -11,47 +11,134 @@
     />
     <style>
       body {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        /* Degradado de fondo más suave y moderno */
+        background: linear-gradient(135deg, #845EC2 0%, #D65DB1 50%, #FF6F91 100%);
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        min-height: 100vh; /* Asegura que el degradado cubra toda la altura */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem 1rem; /* Padding general para el cuerpo */
+      }
+      .container-card {
+        background: rgba(255, 255, 255, 0.95); /* Fondo ligeramente transparente */
+        border-radius: 20px; /* Bordes más redondeados */
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); /* Sombra más pronunciada y suave */
+        padding: 2.5rem; /* Más padding interno */
+        max-width: 38rem; /* Aumentar el ancho máximo para mejor presentación */
+        width: 100%;
+        margin-bottom: 2rem; /* Espacio entre las tarjetas */
+        backdrop-filter: blur(5px); /* Efecto de desenfoque para el fondo */
       }
       .hero-icon {
-        color: #667eea;
-        font-size: 3rem;
-        margin-bottom: 1rem;
+        color: #845EC2; /* Color del icono principal */
+        font-size: 3.5rem; /* Icono un poco más grande */
+        margin-bottom: 1.5rem;
+        text-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra sutil para el icono */
       }
       .result-line {
-        font-family: "Courier New", monospace;
+        font-family: "Fira Code", "Courier New", monospace; /* Fuente monoespaciada más moderna */
+        background-color: #f8f8f8; /* Fondo más claro para los resultados */
+        border: 1px solid #e0e0e0; /* Borde más suave */
+        border-left: 4px solid #845EC2; /* Borde izquierdo de color */
+        padding: 0.75rem;
+        border-radius: 8px;
+        white-space: pre-wrap; /* Permite que el texto se ajuste */
+        word-break: break-all; /* Rompe palabras largas */
       }
       .credit {
         max-width: 400px;
-        margin: 0 auto;
-        background: rgba(255 255 255 / 0.15);
-        backdrop-filter: blur(8px);
-        border-radius: 12px;
+        margin-top: 2rem; /* Más espacio arriba */
+        background: rgba(255 255 255 / 0.2); /* Fondo más transparente */
+        backdrop-filter: blur(10px); /* Mayor desenfoque */
+        border-radius: 15px; /* Bordes más redondeados */
         padding: 1rem 1.5rem;
         color: #f3f4f6;
-        font-size: 0.9rem;
+        font-size: 0.95rem; /* Fuente ligeramente más grande */
         font-weight: 600;
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 0.5rem;
-        box-shadow: 0 4px 15px rgba(118, 75, 162, 0.4);
+        gap: 0.75rem; /* Más espacio entre elementos */
+        box-shadow: 0 6px 20px rgba(118, 75, 162, 0.3); /* Sombra más suave y extendida */
         user-select: none;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); /* Sombra de texto */
       }
-      .credit img {
-        width: 20px;
-        height: 20px;
-        filter: drop-shadow(0 0 1px rgba(0, 0, 0, 0.3));
+      .credit svg {
+        filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.5)); /* Sombra para el icono de estrella */
+      }
+      /* Estilos para los botones */
+      .btn-primary {
+        background: linear-gradient(45deg, #845EC2, #D65DB1);
+        color: white;
+        font-weight: bold;
+        padding: 0.85rem 2.25rem;
+        border-radius: 10px;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba(132, 94, 194, 0.4);
+      }
+      .btn-primary:hover {
+        transform: translateY(-3px) scale(1.02);
+        box-shadow: 0 8px 20px rgba(132, 94, 194, 0.5);
+      }
+      .btn-primary:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
+      }
+      .btn-secondary {
+        background-color: #e0e0e0;
+        color: #555;
+        font-weight: 600;
+        padding: 0.75rem 1.75rem;
+        border-radius: 10px;
+        transition: all 0.3s ease;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+      }
+      .btn-secondary:hover {
+        background-color: #d0d0d0;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
+      }
+      .btn-secondary:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
+      }
+      /* Estilos para inputs */
+      input[type="text"], input[type="file"] {
+        border: 1px solid #d0d0d0;
+        border-radius: 8px;
+        padding: 0.75rem 1rem;
+        transition: all 0.3s ease;
+      }
+      input[type="text"]:focus, input[type="file"]:focus-within {
+        border-color: #D65DB1;
+        box-shadow: 0 0 0 3px rgba(214, 93, 177, 0.2);
+        outline: none;
+      }
+      input[type="file"]::file-selector-button {
+        background-color: #FF6F91;
+        color: white;
+        padding: 0.6rem 1.2rem;
+        border-radius: 8px;
+        border: none;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+      input[type="file"]::file-selector-button:hover {
+        background-color: #e65c7e;
       }
     </style>
 </head>
 <body class="min-h-screen flex flex-col items-center justify-center py-8 px-4">
-    <div
-      class="bg-white rounded-xl shadow-2xl p-10 max-w-3xl w-full mb-8"
-    >
+    <div class="container-card">
       <div class="text-center mb-8">
-        <i class="fas fa-search hero-icon"></i>
+        <i class="fas fa-search hero-icon" style="color: #845EC2;"></i>
         <h1 class="text-4xl font-bold text-gray-800 mb-2">ULPCHK</h1>
         <p class="text-gray-600">Ingresar archivos ULP (Url:Log:Pass)</p>
       </div>
@@ -68,7 +155,7 @@
           type="file"
           id="fileInput"
           accept=".txt"
-          class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 transition duration-300"
+          class="block w-full text-sm text-gray-500"
         />
       </div>
 
@@ -83,7 +170,7 @@
           type="text"
           id="keywordInput"
           placeholder="Ingresa la palabra clave"
-          class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-300"
+          class="w-full"
         />
       </div>
 
@@ -99,22 +186,22 @@
           type="text"
           id="outputFileNameInput"
           placeholder="Ej: mis_resultados_filtrados"
-          class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition duration-300"
+          class="w-full"
         />
         <p class="text-gray-500 text-xs mt-1">Si no se especifica, se usará un nombre por defecto.</p>
       </div>
       <!-- FIN CASILLA -->
 
-      <div class="flex justify-center mb-6">
+      <div class="flex justify-center gap-4 mb-6">
         <button
             id="clearSearchBtn"
-            class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-lg transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-105 mr-4"
+            class="btn-secondary"
         >
             <i class="fas fa-times mr-2"></i>Borrar Resultados
         </button>
         <button
           id="searchBtn"
-          class="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold py-3 px-8 rounded-lg transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-105"
+          class="btn-primary"
         >
           <i class="fas fa-search mr-2"></i>Buscar
         </button>
@@ -138,11 +225,9 @@
     </div>
 
     <!-- SECCIÓN PARA ELIMINAR DUPLICADOS -->
-    <div
-      class="bg-white rounded-xl shadow-2xl p-10 max-w-3xl w-full mt-8"
-    >
+    <div class="container-card mt-8">
       <div class="text-center mb-8">
-        <i class="fas fa-eraser hero-icon" style="color: #ef4444;"></i>
+        <i class="fas fa-eraser hero-icon" style="color: #FF6F91;"></i>
         <h2 class="text-3xl font-bold text-gray-800 mb-2">Eliminar Duplicados</h2>
         <p class="text-gray-600">Sube un archivo TXT para eliminar líneas duplicadas.</p>
       </div>
@@ -158,7 +243,7 @@
           type="file"
           id="deduplicateFileInput"
           accept=".txt"
-          class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-red-50 file:text-red-700 hover:file:bg-red-100 transition duration-300"
+          class="block w-full text-sm text-gray-500"
         />
       </div>
 
@@ -174,22 +259,22 @@
           type="text"
           id="outputDeduplicateFileNameInput"
           placeholder="Ej: mi_lista_limpia"
-          class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition duration-300"
+          class="w-full"
         />
         <p class="text-gray-500 text-xs mt-1">Si no se especifica, se usará un nombre por defecto.</p>
       </div>
       <!-- FIN CASILLA -->
 
-      <div class="flex justify-center mb-6">
+      <div class="flex justify-center gap-4 mb-6">
         <button
             id="clearDeduplicateBtn"
-            class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-lg transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-105 mr-4"
+            class="btn-secondary"
         >
             <i class="fas fa-times mr-2"></i>Borrar Resultados
         </button>
         <button
           id="deduplicateBtn"
-          class="bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700 text-white font-bold py-3 px-8 rounded-lg transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-105"
+          class="btn-primary"
         >
           <i class="fas fa-magic mr-2"></i>Limpiar Duplicados
         </button>
@@ -274,7 +359,7 @@
                 matchingLines
                   .map(
                     (line, index) =>
-                      `<div class="mb-3"><pre class="bg-white p-3 rounded border text-sm overflow-auto result-line">${index + 1}. ${line}</pre></div>`
+                      `<div class="mb-3"><pre class="result-line">${index + 1}. ${line}</pre></div>`
                   )
                   .join("");
 
@@ -322,24 +407,32 @@
           reader.readAsText(file);
         });
 
-      // --- Lógica para habilitar/deshabilitar el botón de búsqueda ---
-      document.getElementById("fileInput").addEventListener("change", toggleButton);
-      document.getElementById("keywordInput").addEventListener("input", toggleButton);
+      // --- Lógica para habilitar/deshabilitar el botón de búsqueda y borrar resultados de búsqueda ---
+      const fileInput = document.getElementById("fileInput");
+      const keywordInput = document.getElementById("keywordInput");
+      const searchBtn = document.getElementById("searchBtn");
+      const clearSearchBtn = document.getElementById("clearSearchBtn");
 
       function toggleButton() {
-        const fileSelected = document.getElementById("fileInput").files.length > 0;
-        const keywordEntered = document.getElementById("keywordInput").value.trim() !== "";
-        document.getElementById("searchBtn").disabled = !(fileSelected && keywordEntered);
+        const fileSelected = fileInput.files.length > 0;
+        const keywordEntered = keywordInput.value.trim() !== "";
+        searchBtn.disabled = !(fileSelected && keywordEntered);
+        
+        // Habilitar/deshabilitar el botón de borrar resultados de búsqueda
+        clearSearchBtn.disabled = !(fileSelected || keywordEntered || document.getElementById("results").innerHTML.includes("Líneas encontradas"));
       }
+
+      fileInput.addEventListener("change", toggleButton);
+      keywordInput.addEventListener("input", toggleButton);
 
       // --- Lógica para el botón "Borrar Resultados" de la sección de búsqueda ---
       document.getElementById("clearSearchBtn").addEventListener("click", function() {
           document.getElementById("results").innerHTML = '<p class="text-gray-500 text-center">Los resultados aparecerán aquí...</p>';
           document.getElementById("downloadSection").style.display = "none";
-          document.getElementById("fileInput").value = ""; // Limpiar el input de archivo
-          document.getElementById("keywordInput").value = ""; // Limpiar el input de palabra clave
+          fileInput.value = ""; // Limpiar el input de archivo
+          keywordInput.value = ""; // Limpiar el input de palabra clave
           document.getElementById("outputFileNameInput").value = ""; // Limpiar el input del nombre de archivo de salida
-          toggleButton(); // Re-evaluar el estado del botón de búsqueda
+          toggleButton(); // Re-evaluar el estado de los botones
       });
 
 
@@ -407,48 +500,4 @@
                 type: "text/plain",
               });
               const url = URL.createObjectURL(blob);
-              const a = document.createElement("a");
-              a.href = url;
-              
-              // Determinar el nombre del archivo de descarga para deduplicados
-              let finalDeduplicateFileName = `ULPCHK_limpio_${file.name.replace(/\.txt$/i, '')}.txt`; // Nombre por defecto
-              if (outputDeduplicateFileName) {
-                // Si el usuario proporcionó un nombre, usarlo y asegurar la extensión .txt
-                finalDeduplicateFileName = outputDeduplicateFileName.endsWith(".txt") ? outputDeduplicateFileName : `${outputDeduplicateFileName}.txt`;
-              }
-              
-              a.download = finalDeduplicateFileName;
-              
-              document.body.appendChild(a);
-              a.click();
-              document.body.removeChild(a);
-              URL.revokeObjectURL(url);
-            };
-          } else {
-            deduplicateResultsDiv.innerHTML =
-              '<p class="text-yellow-500 text-center"><i class="fas fa-info-circle mr-2"></i>El archivo está vacío o no contiene líneas válidas después de la limpieza.</p>';
-          }
-
-          deduplicateBtn.disabled = false;
-          deduplicateBtn.innerHTML = '<i class="fas fa-magic mr-2"></i>Limpiar Duplicados';
-        };
-
-        reader.onerror = function () {
-          deduplicateResultsDiv.innerHTML =
-            '<p class="text-red-500 text-center"><i class="fas fa-exclamation-triangle mr-2"></i>Error al leer el archivo.</p>';
-          deduplicateBtn.disabled = false;
-          deduplicateBtn.innerHTML = '<i class="fas fa-magic mr-2"></i>Limpiar Duplicados';
-        };
-
-        reader.readAsText(file);
-      });
-
-      // --- Lógica para el botón "Borrar Resultados" de la sección de eliminación de duplicados ---
-      document.getElementById("clearDeduplicateBtn").addEventListener("click", function() {
-          document.getElementById("deduplicateResults").innerHTML = '<p class="text-gray-500 text-center">Los resultados de la limpieza aparecerán aquí...</p>';
-          document.getElementById("deduplicateFileInput").value = ""; // Limpiar el input de archivo
-          document.getElementById("outputDeduplicateFileNameInput").value = ""; // Limpiar el input del nombre de archivo de salida
-          document.getElementById("deduplicateBtn").disabled = true; // Deshabilitar el botón de limpiar duplicados
-      });
-
-      // Habilitar/deshabilita
+      
