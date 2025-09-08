@@ -4,8 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>ULPCHK</title>
-    <!-- Google Fonts: Poppins para un look moderno y legible -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <link
       rel="stylesheet"
@@ -14,123 +12,48 @@
     <style>
       body {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        font-family: 'Poppins', sans-serif; /* Usar Poppins */
-        color: #333; /* Color de texto base más oscuro para mejor contraste */
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       }
       .hero-icon {
-        color: #667eea; /* Mantener el color principal */
-        font-size: 3.5rem; /* Ligeramente más grande */
-        margin-bottom: 1.5rem; /* Más espacio */
-        text-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Sombra sutil */
+        color: #667eea;
+        font-size: 3rem;
+        margin-bottom: 1rem;
       }
       .result-line {
         font-family: "Courier New", monospace;
-        background-color: #f8f8f8; /* Fondo ligeramente diferente para el código */
-        border-left: 4px solid #667eea; /* Borde izquierdo para destacar */
-        padding: 0.75rem 1rem; /* Ajustar padding */
-        border-radius: 6px; /* Bordes redondeados */
-        box-shadow: inset 0 1px 3px rgba(0,0,0,0.05); /* Sombra interna sutil */
       }
       .credit {
         max-width: 400px;
-        margin: 2rem auto 0; /* Más margen superior */
-        background: rgba(255 255 255 / 0.2); /* Fondo más transparente */
-        backdrop-filter: blur(10px); /* Blur más pronunciado */
-        border-radius: 16px; /* Bordes más redondeados */
-        padding: 1.2rem 1.8rem; /* Más padding */
-        color: #e0e7ff; /* Color de texto más claro */
-        font-size: 0.95rem; /* Ligeramente más grande */
-        font-weight: 500; /* Peso de fuente ajustado */
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.75rem; /* Más espacio entre elementos */
-        box-shadow: 0 6px 20px rgba(118, 75, 162, 0.3); /* Sombra más pronunciada */
-        user-select: none;
-        border: 1px solid rgba(255,255,255,0.3); /* Borde sutil */
-      }
-      .credit svg {
-        filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.4)); /* Sombra más fuerte para el SVG */
-      }
-      /* Estilos para los contenedores principales */
-      .main-card {
-        background: #ffffff;
-        border-radius: 20px; /* Bordes más redondeados */
-        box-shadow: 0 10px 30px rgba(0,0,0,0.15); /* Sombra más suave y extendida */
-        padding: 2.5rem; /* Más padding */
-        border: 1px solid #f0f0f0; /* Borde sutil */
-      }
-      /* Mejoras en los inputs */
-      input[type="text"], input[type="file"] {
-        border-radius: 10px; /* Bordes más redondeados */
-        padding: 0.8rem 1rem; /* Ajustar padding */
-        border: 1px solid #e0e0e0; /* Borde más suave */
-        transition: all 0.3s ease;
-      }
-      input[type="text"]:focus {
-        border-color: #667eea; /* Color de enfoque principal */
-        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2); /* Anillo de enfoque suave */
-      }
-      /* Mejoras en los botones */
-      button {
-        border-radius: 10px; /* Bordes más redondeados */
-        padding: 0.9rem 2.2rem; /* Ajustar padding */
-        font-weight: 600; /* Peso de fuente más fuerte */
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* Sombra para botones */
-      }
-      button:hover {
-        transform: translateY(-2px); /* Efecto hover sutil */
-        box-shadow: 0 6px 20px rgba(0,0,0,0.15); /* Sombra más pronunciada en hover */
-      }
-      button:disabled {
-        box-shadow: none; /* Sin sombra cuando está deshabilitado */
-        transform: none; /* Sin transformación cuando está deshabilitado */
-      }
-      /* Estilos específicos para el botón de limpiar */
-      #clearSearchBtn, #clearDeduplicateBtn {
-        background-color: #e0e0e0; /* Un gris más claro */
-        color: #555; /* Texto más oscuro */
-        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-      }
-      #clearSearchBtn:hover, #clearDeduplicateBtn:hover {
-        background-color: #d0d0d0;
-        color: #333;
-      }
-      /* Mensajes de estado */
-      .status-message {
-        padding: 1rem;
-        border-radius: 10px;
-        margin-top: 1rem;
-        font-weight: 500;
+        margin: 0 auto;
+        background: rgba(255 255 255 / 0.15);
+        backdrop-filter: blur(8px);
+        border-radius: 12px;
+        padding: 1rem 1.5rem;
+        color: #f3f4f6;
+        font-size: 0.9rem;
+        font-weight: 600;
         display: flex;
         align-items: center;
         justify-content: center;
         gap: 0.5rem;
+        box-shadow: 0 4px 15px rgba(118, 75, 162, 0.4);
+        user-select: none;
       }
-      .status-message.red {
-        background-color: #fee2e2; /* red-100 */
-        color: #dc2626; /* red-600 */
-        border: 1px solid #fca5a5; /* red-300 */
-      }
-      .status-message.yellow {
-        background-color: #fffbeb; /* yellow-100 */
-        color: #d97706; /* yellow-600 */
-        border: 1px solid #fcd34d; /* yellow-300 */
-      }
-      .status-message.green {
-        background-color: #dcfce7; /* green-100 */
-        color: #16a34a; /* green-600 */
-        border: 1px solid #86efac; /* green-300 */
+      .credit img {
+        width: 20px;
+        height: 20px;
+        filter: drop-shadow(0 0 1px rgba(0, 0, 0, 0.3));
       }
     </style>
 </head>
-<body class="min-h-screen flex flex-col items-center justify-center py-10 px-4">
-    <div class="main-card max-w-3xl w-full mb-10">
+<body class="min-h-screen flex flex-col items-center justify-center py-8 px-4">
+    <div
+      class="bg-white rounded-xl shadow-2xl p-10 max-w-3xl w-full mb-8"
+    >
       <div class="text-center mb-8">
         <i class="fas fa-search hero-icon"></i>
         <h1 class="text-4xl font-bold text-gray-800 mb-2">ULPCHK</h1>
-        <p class="text-gray-600 text-lg">Herramienta para procesar archivos ULP (Url:Log:Pass)</p>
+        <p class="text-gray-600">Ingresar archivos ULP (Url:Log:Pass)</p>
       </div>
 
       <div class="mb-6">
@@ -154,12 +77,12 @@
           for="keywordInput"
           class="block text-sm font-medium text-gray-700 mb-2 flex items-center"
         >
-          <i class="fas fa-keyboard mr-2 text-green-500"></i> Palabra clave para buscar:
+          <i class="fas fa-keyboard mr-2 text-green-500"></i> Palabra clave:
         </label>
         <input
           type="text"
           id="keywordInput"
-          placeholder="Ej: gmail.com, password123"
+          placeholder="Ingresa la palabra clave"
           class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-300"
         />
       </div>
@@ -182,7 +105,7 @@
       </div>
       <!-- FIN CASILLA -->
 
-      <div class="flex justify-center mb-6 gap-4">
+      <div class="flex justify-center mb-6">
         <button
           id="searchBtn"
           class="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold py-3 px-8 rounded-lg transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-105"
@@ -191,7 +114,7 @@
         </button>
         <button
             id="clearSearchBtn"
-            class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-3 px-8 rounded-lg transition duration-300"
+            class="ml-4 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-3 px-8 rounded-lg transition duration-300"
             style="display: none;"
         >
             <i class="fas fa-times mr-2"></i>Limpiar
@@ -209,18 +132,20 @@
 
       <div
         id="results"
-        class="bg-gray-50 p-4 rounded-md min-h-32 border border-gray-200 overflow-auto max-h-96"
+        class="bg-gray-50 p-4 rounded-md min-h-32 border border-gray-200"
       >
         <p class="text-gray-500 text-center">Los resultados aparecerán aquí...</p>
       </div>
     </div>
 
     <!-- SECCIÓN PARA ELIMINAR DUPLICADOS -->
-    <div class="main-card max-w-3xl w-full mt-8">
+    <div
+      class="bg-white rounded-xl shadow-2xl p-10 max-w-3xl w-full mt-8"
+    >
       <div class="text-center mb-8">
         <i class="fas fa-eraser hero-icon" style="color: #ef4444;"></i>
         <h2 class="text-3xl font-bold text-gray-800 mb-2">Eliminar Duplicados</h2>
-        <p class="text-gray-600 text-lg">Sube un archivo TXT para eliminar líneas duplicadas.</p>
+        <p class="text-gray-600">Sube un archivo TXT para eliminar líneas duplicadas.</p>
       </div>
 
       <div class="mb-6">
@@ -256,7 +181,7 @@
       </div>
       <!-- FIN CASILLA -->
 
-      <div class="flex justify-center mb-6 gap-4">
+      <div class="flex justify-center mb-6">
         <button
           id="deduplicateBtn"
           class="bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700 text-white font-bold py-3 px-8 rounded-lg transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-105"
@@ -265,14 +190,14 @@
         </button>
         <button
             id="clearDeduplicateBtn"
-            class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-3 px-8 rounded-lg transition duration-300"
+            class="ml-4 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-3 px-8 rounded-lg transition duration-300"
             style="display: none;"
         >
             <i class="fas fa-times mr-2"></i>Limpiar
         </button>
       </div>
 
-      <div id="deduplicateResults" class="bg-gray-50 p-4 rounded-md min-h-32 border border-gray-200 overflow-auto max-h-96">
+      <div id="deduplicateResults" class="bg-gray-50 p-4 rounded-md min-h-32 border border-gray-200">
         <p class="text-gray-500 text-center">Los resultados de la limpieza aparecerán aquí...</p>
       </div>
     </div>
@@ -320,14 +245,14 @@
 
           if (!fileInput.files[0]) {
             resultsDiv.innerHTML =
-              '<p class="status-message red"><i class="fas fa-exclamation-triangle mr-2"></i>Por favor, selecciona un archivo TXT.</p>';
+              '<p class="text-red-500 text-center"><i class="fas fa-exclamation-triangle mr-2"></i>Por favor, selecciona un archivo TXT.</p>';
             clearSearchBtn.style.display = "none"; // Ocultar el botón de limpiar si hay error
             return;
           }
 
           if (!keyword) {
             resultsDiv.innerHTML =
-              '<p class="status-message red"><i class="fas fa-exclamation-triangle mr-2"></i>Por favor, ingresa una palabra clave.</p>';
+              '<p class="text-red-500 text-center"><i class="fas fa-exclamation-triangle mr-2"></i>Por favor, ingresa una palabra clave.</p>';
             clearSearchBtn.style.display = "none"; // Ocultar el botón de limpiar si hay error
             return;
           }
@@ -355,7 +280,7 @@
                 matchingLines
                   .map(
                     (line, index) =>
-                      `<div class="mb-3"><pre class="result-line">${index + 1}. ${line}</pre></div>`
+                      `<div class="mb-3"><pre class="bg-white p-3 rounded border text-sm overflow-auto result-line">${index + 1}. ${line}</pre></div>`
                   )
                   .join("");
 
@@ -385,7 +310,7 @@
               };
             } else {
               resultsDiv.innerHTML =
-                '<p class="status-message yellow"><i class="fas fa-search-minus mr-2"></i>No se encontraron líneas que contengan la palabra clave.</p>';
+                '<p class="text-yellow-500 text-center"><i class="fas fa-search-minus mr-2"></i>No se encontraron líneas que contengan la palabra clave.</p>';
               document.getElementById("downloadSection").style.display = "none";
               clearSearchBtn.style.display = "none"; // Ocultar el botón de limpiar
             }
@@ -396,7 +321,7 @@
 
           reader.onerror = function () {
             resultsDiv.innerHTML =
-              '<p class="status-message red"><i class="fas fa-exclamation-triangle mr-2"></i>Error al leer el archivo.</p>';
+              '<p class="text-red-500 text-center"><i class="fas fa-exclamation-triangle mr-2"></i>Error al leer el archivo.</p>';
             searchBtn.disabled = false;
             searchBtn.innerHTML = '<i class="fas fa-search mr-2"></i>Buscar';
             document.getElementById("downloadSection").style.display = "none";
@@ -440,7 +365,7 @@
 
         if (!deduplicateFileInput.files[0]) {
           deduplicateResultsDiv.innerHTML =
-            '<p class="status-message red"><i class="fas fa-exclamation-triangle mr-2"></i>Por favor, selecciona un archivo TXT para eliminar duplicados.</p>';
+            '<p class="text-red-500 text-center"><i class="fas fa-exclamation-triangle mr-2"></i>Por favor, selecciona un archivo TXT para eliminar duplicados.</p>';
           clearDeduplicateBtn.style.display = "none"; // Ocultar el botón de limpiar si hay error
           return;
         }
@@ -455,4 +380,72 @@
         reader.onload = function (e) {
           const text = e.target.result;
           const lines = text.split("\n");
-  
+          
+          const originalLines = []; // Para almacenar todas las líneas originales (no vacías)
+          const uniqueNormalizedLines = new Set(); // Para almacenar las versiones normalizadas únicas
+          const finalUniqueLines = []; // Para almacenar las líneas únicas en su formato original
+
+          lines.forEach(line => {
+            const trimmedLine = line.trim();
+            if (trimmedLine === '') { // Ignorar líneas completamente vacías
+                return;
+            }
+            originalLines.push(line); // Guardar la línea original para el conteo
+            const normalizedLine = trimmedLine.toLowerCase(); // Normalizar para comparación
+
+            if (!uniqueNormalizedLines.has(normalizedLine)) {
+              uniqueNormalizedLines.add(normalizedLine);
+              finalUniqueLines.push(line); // Añadir la línea original si su versión normalizada es única
+            }
+          });
+
+          const originalCount = originalLines.length; // Contar las líneas no vacías originales
+          const uniqueCount = finalUniqueLines.length;
+          const removedCount = originalCount - uniqueCount;
+
+          if (uniqueCount > 0) {
+            deduplicateResultsDiv.innerHTML =
+              `<h3 class="text-lg font-semibold mb-4 text-gray-800 flex items-center"><i class="fas fa-check-circle mr-2 text-green-500"></i>Proceso Completado:</h3>
+              <p class="text-gray-700 mb-2">Líneas originales (no vacías): <span class="font-bold">${originalCount}</span></p>
+              <p class="text-gray-700 mb-4">Líneas únicas: <span class="font-bold">${uniqueCount}</span> (Se eliminaron <span class="font-bold text-red-600">${removedCount}</span> duplicados)</p>
+              <div class="text-center">
+                <button id="downloadUniqueBtn" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-lg transition duration-300">
+                  <i class="fas fa-download mr-2"></i>Descargar Archivo Limpio
+                </button>
+              </div>`;
+            clearDeduplicateBtn.style.display = "inline-block"; // Mostrar el botón de limpiar
+
+            document.getElementById("downloadUniqueBtn").onclick = function () {
+              const blob = new Blob([finalUniqueLines.join("\n")], {
+                type: "text/plain",
+              });
+              const url = URL.createObjectURL(blob);
+              const a = document.createElement("a");
+              a.href = url;
+              
+              // Determinar el nombre del archivo de descarga para deduplicados
+              let finalDeduplicateFileName = `ULPCHK_limpio_${file.name.replace(/\.txt$/i, '')}.txt`; // Nombre por defecto
+              if (outputDeduplicateFileName) {
+                // Si el usuario proporcionó un nombre, usarlo y asegurar la extensión .txt
+                finalDeduplicateFileName = outputDeduplicateFileName.endsWith(".txt") ? outputDeduplicateFileName : `${outputDeduplicateFileName}.txt`;
+              }
+              
+              a.download = finalDeduplicateFileName;
+              
+              document.body.appendChild(a);
+              a.click();
+              document.body.removeChild(a);
+              URL.revokeObjectURL(url);
+            };
+          } else {
+            deduplicateResultsDiv.innerHTML =
+              '<p class="text-yellow-500 text-center"><i class="fas fa-info-circle mr-2"></i>El archivo está vacío o no contiene líneas válidas después de la limpieza.</p>';
+            clearDeduplicateBtn.style.display = "none"; // Ocultar el botón de limpiar
+          }
+
+          deduplicateBtn.disabled = false;
+          deduplicateBtn.innerHTML = '<i class="fas fa-magic mr-2"></i>Limpiar Duplicados';
+        };
+
+        reader.onerror = function () {
+            
