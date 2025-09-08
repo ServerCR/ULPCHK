@@ -16,75 +16,7 @@
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         font-family: 'Poppins', sans-serif; /* Usar Poppins */
         color: #333; /* Color de texto base más oscuro para mejor contraste */
-        transition: background-color 0.3s ease, color 0.3s ease;
       }
-      /* Modo Oscuro */
-      body.dark-mode {
-        background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%); /* Fondo oscuro */
-        color: #e2e8f0; /* Texto claro */
-      }
-      body.dark-mode .main-card {
-        background: #2d3748; /* Fondo de tarjeta oscuro */
-        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        border-color: #4a5568;
-      }
-      body.dark-mode .hero-icon {
-        color: #9f7aea; /* Color de icono ajustado para oscuro */
-      }
-      body.dark-mode h1, body.dark-mode h2, body.dark-mode h3 {
-        color: #e2e8f0;
-      }
-      body.dark-mode p {
-        color: #a0aec0;
-      }
-      body.dark-mode label {
-        color: #cbd5e0;
-      }
-      body.dark-mode input[type="text"], body.dark-mode input[type="file"] {
-        background-color: #4a5568;
-        border-color: #667eea;
-        color: #e2e8f0;
-      }
-      body.dark-mode input::placeholder {
-        color: #a0aec0;
-      }
-      body.dark-mode input[type="file"]::-webkit-file-upload-button {
-        background-color: #667eea;
-        color: #e2e8f0;
-      }
-      body.dark-mode input[type="file"]:hover::-webkit-file-upload-button {
-        background-color: #764ba2;
-      }
-      body.dark-mode .result-line {
-        background-color: #4a5568;
-        border-left-color: #9f7aea;
-        color: #e2e8f0;
-      }
-      body.dark-mode .bg-gray-50 { /* Para los divs de resultados */
-        background-color: #4a5568;
-        border-color: #667eea;
-      }
-      body.dark-mode .text-gray-500 {
-        color: #a0aec0;
-      }
-      body.dark-mode .credit {
-        background: rgba(0,0,0,0.3);
-        border-color: rgba(255,255,255,0.1);
-        box-shadow: 0 6px 20px rgba(0,0,0,0.5);
-      }
-      body.dark-mode #clearSearchBtn, body.dark-mode #clearDeduplicateBtn {
-        background-color: #667eea;
-        color: #e2e8f0;
-      }
-      body.dark-mode #clearSearchBtn:hover, body.dark-mode #clearDeduplicateBtn:hover {
-        background-color: #764ba2;
-        color: #e2e8f0;
-      }
-      body.dark-mode .status-message.red { background-color: #4a1c1c; color: #ef4444; border-color: #b91c1c; }
-      body.dark-mode .status-message.yellow { background-color: #4a3200; color: #fbbf24; border-color: #d97706; }
-      body.dark-mode .status-message.green { background-color: #1c4a1c; color: #4ade80; border-color: #16a34a; }
-
-
       .hero-icon {
         color: #667eea; /* Mantener el color principal */
         font-size: 3.5rem; /* Ligeramente más grande */
@@ -98,7 +30,6 @@
         padding: 0.75rem 1rem; /* Ajustar padding */
         border-radius: 6px; /* Bordes redondeados */
         box-shadow: inset 0 1px 3px rgba(0,0,0,0.05); /* Sombra interna sutil */
-        word-break: break-all; /* Romper palabras largas */
       }
       .credit {
         max-width: 400px;
@@ -117,7 +48,6 @@
         box-shadow: 0 6px 20px rgba(118, 75, 162, 0.3); /* Sombra más pronunciada */
         user-select: none;
         border: 1px solid rgba(255,255,255,0.3); /* Borde sutil */
-        transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
       }
       .credit svg {
         filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.4)); /* Sombra más fuerte para el SVG */
@@ -129,10 +59,9 @@
         box-shadow: 0 10px 30px rgba(0,0,0,0.15); /* Sombra más suave y extendida */
         padding: 2.5rem; /* Más padding */
         border: 1px solid #f0f0f0; /* Borde sutil */
-        transition: background-color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
       }
       /* Mejoras en los inputs */
-      input[type="text"] {
+      input[type="text"], input[type="file"] {
         border-radius: 10px; /* Bordes más redondeados */
         padding: 0.8rem 1rem; /* Ajustar padding */
         border: 1px solid #e0e0e0; /* Borde más suave */
@@ -142,26 +71,6 @@
         border-color: #667eea; /* Color de enfoque principal */
         box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2); /* Anillo de enfoque suave */
       }
-      /* Estilo para input type="file" */
-      input[type="file"] {
-        border-radius: 10px;
-        border: 1px solid #e0e0e0;
-        padding: 0.5rem; /* Ajustar padding para que el botón interno no se vea afectado */
-        transition: all 0.3s ease;
-      }
-      input[type="file"]::-webkit-file-upload-button {
-        background-color: #667eea;
-        color: white;
-        padding: 0.6rem 1.2rem;
-        border-radius: 8px;
-        border: none;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-      }
-      input[type="file"]:hover::-webkit-file-upload-button {
-        background-color: #764ba2;
-      }
-
       /* Mejoras en los botones */
       button {
         border-radius: 10px; /* Bordes más redondeados */
@@ -198,7 +107,6 @@
         align-items: center;
         justify-content: center;
         gap: 0.5rem;
-        transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
       }
       .status-message.red {
         background-color: #fee2e2; /* red-100 */
@@ -215,145 +123,9 @@
         color: #16a34a; /* green-600 */
         border: 1px solid #86efac; /* green-300 */
       }
-
-      /* Drag and Drop Area */
-      .drop-area {
-        border: 2px dashed #a0aec0;
-        border-radius: 10px;
-        padding: 1.5rem;
-        text-align: center;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        margin-top: 0.5rem;
-      }
-      .drop-area.highlight {
-        border-color: #667eea;
-        background-color: #e0e7ff; /* blue-100 */
-      }
-      body.dark-mode .drop-area.highlight {
-        background-color: #4a5568;
-        border-color: #9f7aea;
-      }
-      .drop-area p {
-        margin-top: 0.5rem;
-        font-size: 0.9rem;
-        color: #718096;
-      }
-      body.dark-mode .drop-area p {
-        color: #a0aec0;
-      }
-
-      /* Progress Bar */
-      .progress-container {
-        width: 100%;
-        background-color: #e2e8f0;
-        border-radius: 5px;
-        margin-top: 1rem;
-        overflow: hidden;
-        height: 20px;
-        display: none; /* Oculto por defecto */
-      }
-      body.dark-mode .progress-container {
-        background-color: #4a5568;
-      }
-      .progress-bar {
-        height: 100%;
-        width: 0%;
-        background-color: #667eea;
-        border-radius: 5px;
-        text-align: center;
-        color: white;
-        font-size: 0.8rem;
-        line-height: 20px;
-        transition: width 0.1s ease;
-      }
-      .progress-text {
-        margin-top: 0.5rem;
-        font-size: 0.9rem;
-        text-align: center;
-        color: #718096;
-        display: none; /* Oculto por defecto */
-      }
-      body.dark-mode .progress-text {
-        color: #a0aec0;
-      }
-
-      /* Toggle Switch for Dark Mode */
-      .switch {
-        position: relative;
-        display: inline-block;
-        width: 40px;
-        height: 20px;
-      }
-      .switch input {
-        opacity: 0;
-        width: 0;
-        height: 0;
-      }
-      .slider {
-        position: absolute;
-        cursor: pointer;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: #ccc;
-        transition: .4s;
-        border-radius: 20px;
-      }
-      .slider:before {
-        position: absolute;
-        content: "";
-        height: 16px;
-        width: 16px;
-        left: 2px;
-        bottom: 2px;
-        background-color: white;
-        transition: .4s;
-        border-radius: 50%;
-      }
-      input:checked + .slider {
-        background-color: #667eea;
-      }
-      input:focus + .slider {
-        box-shadow: 0 0 1px #667eea;
-      }
-      input:checked + .slider:before {
-        transform: translateX(20px);
-      }
-      .dark-mode-toggle {
-        position: absolute;
-        top: 1.5rem;
-        right: 1.5rem;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        color: #e0e7ff;
-        font-size: 0.9rem;
-        font-weight: 500;
-      }
-      body.dark-mode .dark-mode-toggle {
-        color: #a0aec0;
-      }
-
-      /* AUMENTO DEL TAMAÑO DEL ÁREA DE RESULTADOS */
-      #results, #deduplicateResults {
-        max-height: 500px; /* Aumenta la altura máxima a 500px */
-        /* Puedes probar con 600px si necesitas aún más espacio */
-      }
     </style>
 </head>
 <body class="min-h-screen flex flex-col items-center justify-center py-10 px-4">
-
-    <div class="dark-mode-toggle">
-        <i class="fas fa-sun"></i>
-        <label class="switch">
-            <input type="checkbox" id="darkModeToggle">
-            <span class="slider"></span>
-        </label>
-        <i class="fas fa-moon"></i>
-    </div>
-
     <div class="main-card max-w-3xl w-full mb-10">
       <div class="text-center mb-8">
         <i class="fas fa-search hero-icon"></i>
@@ -375,10 +147,6 @@
           accept=".txt"
           class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 transition duration-300"
         />
-        <div id="searchDropArea" class="drop-area">
-            <i class="fas fa-cloud-upload-alt text-4xl text-gray-400"></i>
-            <p>Arrastra y suelta tu archivo TXT aquí</p>
-        </div>
       </div>
 
       <div class="mb-6">
@@ -430,11 +198,6 @@
         </button>
       </div>
 
-      <div id="searchProgressBarContainer" class="progress-container">
-          <div id="searchProgressBar" class="progress-bar">0%</div>
-      </div>
-      <p id="searchProgressText" class="progress-text">Leyendo archivo...</p>
-
       <div id="downloadSection" class="mb-6 text-center" style="display: none">
         <button
           id="downloadBtn"
@@ -446,7 +209,7 @@
 
       <div
         id="results"
-        class="bg-gray-50 p-4 rounded-md min-h-32 border border-gray-200 overflow-auto"
+        class="bg-gray-50 p-4 rounded-md min-h-32 border border-gray-200 overflow-auto max-h-96"
       >
         <p class="text-gray-500 text-center">Los resultados aparecerán aquí...</p>
       </div>
@@ -473,10 +236,6 @@
           accept=".txt"
           class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-red-50 file:text-red-700 hover:file:bg-red-100 transition duration-300"
         />
-        <div id="deduplicateDropArea" class="drop-area">
-            <i class="fas fa-cloud-upload-alt text-4xl text-gray-400"></i>
-            <p>Arrastra y suelta tu archivo TXT aquí</p>
-        </div>
       </div>
 
       <!-- CASILLA PARA EL NOMBRE DEL ARCHIVO DE RESULTADOS DE DUPLICADOS -->
@@ -513,12 +272,7 @@
         </button>
       </div>
 
-      <div id="deduplicateProgressBarContainer" class="progress-container">
-          <div id="deduplicateProgressBar" class="progress-bar">0%</div>
-      </div>
-      <p id="deduplicateProgressText" class="progress-text">Leyendo archivo...</p>
-
-      <div id="deduplicateResults" class="bg-gray-50 p-4 rounded-md min-h-32 border border-gray-200 overflow-auto">
+      <div id="deduplicateResults" class="bg-gray-50 p-4 rounded-md min-h-32 border border-gray-200 overflow-auto max-h-96">
         <p class="text-gray-500 text-center">Los resultados de la limpieza aparecerán aquí...</p>
       </div>
     </div>
@@ -547,4 +301,158 @@
     <script>
       let matchingLines = [];
 
-      // --- Dar
+      // --- Lógica para la búsqueda de palabras clave ---
+      document
+        .getElementById("searchBtn")
+        .addEventListener("click", function () {
+          const fileInput = document.getElementById("fileInput");
+          const keyword = document
+            .getElementById("keywordInput")
+            .value.trim()
+            .toLowerCase();
+          const outputFileName = document
+            .getElementById("outputFileNameInput")
+            .value.trim();
+
+          const resultsDiv = document.getElementById("results");
+          const searchBtn = document.getElementById("searchBtn");
+          const clearSearchBtn = document.getElementById("clearSearchBtn"); // Obtener el botón de limpiar
+
+          if (!fileInput.files[0]) {
+            resultsDiv.innerHTML =
+              '<p class="status-message red"><i class="fas fa-exclamation-triangle mr-2"></i>Por favor, selecciona un archivo TXT.</p>';
+            clearSearchBtn.style.display = "none"; // Ocultar el botón de limpiar si hay error
+            return;
+          }
+
+          if (!keyword) {
+            resultsDiv.innerHTML =
+              '<p class="status-message red"><i class="fas fa-exclamation-triangle mr-2"></i>Por favor, ingresa una palabra clave.</p>';
+            clearSearchBtn.style.display = "none"; // Ocultar el botón de limpiar si hay error
+            return;
+          }
+
+          searchBtn.disabled = true;
+          searchBtn.innerHTML =
+            '<i class="fas fa-spinner fa-spin mr-2"></i>Buscando...';
+          clearSearchBtn.style.display = "none"; // Ocultar el botón de limpiar mientras busca
+
+          const file = fileInput.files[0];
+          const reader = new FileReader();
+
+          reader.onload = function (e) {
+            const text = e.target.result;
+            const lines = text.split("\n");
+            matchingLines = lines.filter((line) =>
+              line.toLowerCase().includes(keyword)
+            );
+
+            if (matchingLines.length > 0) {
+              resultsDiv.innerHTML =
+                '<h3 class="text-lg font-semibold mb-4 text-gray-800 flex items-center"><i class="fas fa-list mr-2 text-blue-500"></i>Líneas encontradas (' +
+                matchingLines.length +
+                "):</h3>" +
+                matchingLines
+                  .map(
+                    (line, index) =>
+                      `<div class="mb-3"><pre class="result-line">${index + 1}. ${line}</pre></div>`
+                  )
+                  .join("");
+
+              document.getElementById("downloadSection").style.display = "block";
+              clearSearchBtn.style.display = "inline-block"; // Mostrar el botón de limpiar
+              document.getElementById("downloadBtn").onclick = function () {
+                const blob = new Blob([matchingLines.join("\n")], {
+                  type: "text/plain",
+                });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement("a");
+                a.href = url;
+
+                let finalFileName = "resultados_ULPCHK.txt";
+                if (outputFileName) {
+                  finalFileName = outputFileName.endsWith(".txt") ? outputFileName : `${outputFileName}.txt`;
+                } else if (keyword) {
+                  finalFileName = `resultados_ULPCHK_${keyword}.txt`;
+                }
+                
+                a.download = finalFileName;
+                
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+              };
+            } else {
+              resultsDiv.innerHTML =
+                '<p class="status-message yellow"><i class="fas fa-search-minus mr-2"></i>No se encontraron líneas que contengan la palabra clave.</p>';
+              document.getElementById("downloadSection").style.display = "none";
+              clearSearchBtn.style.display = "none"; // Ocultar el botón de limpiar
+            }
+
+            searchBtn.disabled = false;
+            searchBtn.innerHTML = '<i class="fas fa-search mr-2"></i>Buscar';
+          };
+
+          reader.onerror = function () {
+            resultsDiv.innerHTML =
+              '<p class="status-message red"><i class="fas fa-exclamation-triangle mr-2"></i>Error al leer el archivo.</p>';
+            searchBtn.disabled = false;
+            searchBtn.innerHTML = '<i class="fas fa-search mr-2"></i>Buscar';
+            document.getElementById("downloadSection").style.display = "none";
+            clearSearchBtn.style.display = "none"; // Ocultar el botón de limpiar
+          };
+
+          reader.readAsText(file);
+        });
+
+      // --- Lógica para el botón de limpiar resultados de búsqueda ---
+      document.getElementById("clearSearchBtn").addEventListener("click", function() {
+          document.getElementById("results").innerHTML = '<p class="text-gray-500 text-center">Los resultados aparecerán aquí...</p>';
+          document.getElementById("downloadSection").style.display = "none";
+          document.getElementById("clearSearchBtn").style.display = "none";
+          document.getElementById("fileInput").value = ""; // Limpiar el input de archivo
+          document.getElementById("keywordInput").value = ""; // Limpiar el input de palabra clave
+          document.getElementById("outputFileNameInput").value = ""; // Limpiar el input de nombre de archivo de salida
+          toggleButton(); // Re-evaluar el estado del botón de búsqueda
+      });
+
+      // --- Lógica para habilitar/deshabilitar el botón de búsqueda ---
+      document.getElementById("fileInput").addEventListener("change", toggleButton);
+      document.getElementById("keywordInput").addEventListener("input", toggleButton);
+
+      function toggleButton() {
+        const fileSelected = document.getElementById("fileInput").files.length > 0;
+        const keywordEntered = document.getElementById("keywordInput").value.trim() !== "";
+        document.getElementById("searchBtn").disabled = !(fileSelected && keywordEntered);
+      }
+
+      // --- LÓGICA PARA ELIMINAR DUPLICADOS ---
+      document.getElementById("deduplicateBtn").addEventListener("click", function () {
+        const deduplicateFileInput = document.getElementById("deduplicateFileInput");
+        const deduplicateResultsDiv = document.getElementById("deduplicateResults");
+        const deduplicateBtn = document.getElementById("deduplicateBtn");
+        const clearDeduplicateBtn = document.getElementById("clearDeduplicateBtn"); // Obtener el botón de limpiar
+        // Obtener el nombre de archivo deseado por el usuario para la deduplicación
+        const outputDeduplicateFileName = document
+            .getElementById("outputDeduplicateFileNameInput")
+            .value.trim();
+
+        if (!deduplicateFileInput.files[0]) {
+          deduplicateResultsDiv.innerHTML =
+            '<p class="status-message red"><i class="fas fa-exclamation-triangle mr-2"></i>Por favor, selecciona un archivo TXT para eliminar duplicados.</p>';
+          clearDeduplicateBtn.style.display = "none"; // Ocultar el botón de limpiar si hay error
+          return;
+        }
+
+        deduplicateBtn.disabled = true;
+        deduplicateBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Limpiando...';
+        clearDeduplicateBtn.style.display = "none"; // Ocultar el botón de limpiar mientras limpia
+
+        const file = deduplicateFileInput.files[0];
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+          const text = e.target.result;
+          const lines = text.split("\n");
+  
