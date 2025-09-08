@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>ULPCHK</title>
+    <!-- Google Fonts: Poppins para un look moderno y legible -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <link
       rel="stylesheet"
@@ -12,48 +14,351 @@
     <style>
       body {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        font-family: 'Poppins', sans-serif; /* Usar Poppins */
+        color: #333; /* Color de texto base más oscuro para mejor contraste */
+        transition: background-color 0.3s ease, color 0.3s ease;
       }
+      /* Modo Oscuro */
+      body.dark-mode {
+        background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%); /* Fondo oscuro */
+        color: #e2e8f0; /* Texto claro */
+      }
+      body.dark-mode .main-card {
+        background: #2d3748; /* Fondo de tarjeta oscuro */
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        border-color: #4a5568;
+      }
+      body.dark-mode .hero-icon {
+        color: #9f7aea; /* Color de icono ajustado para oscuro */
+      }
+      body.dark-mode h1, body.dark-mode h2, body.dark-mode h3 {
+        color: #e2e8f0;
+      }
+      body.dark-mode p {
+        color: #a0aec0;
+      }
+      body.dark-mode label {
+        color: #cbd5e0;
+      }
+      body.dark-mode input[type="text"], body.dark-mode input[type="file"] {
+        background-color: #4a5568;
+        border-color: #667eea;
+        color: #e2e8f0;
+      }
+      body.dark-mode input::placeholder {
+        color: #a0aec0;
+      }
+      body.dark-mode input[type="file"]::-webkit-file-upload-button {
+        background-color: #667eea;
+        color: #e2e8f0;
+      }
+      body.dark-mode input[type="file"]:hover::-webkit-file-upload-button {
+        background-color: #764ba2;
+      }
+      body.dark-mode .result-line {
+        background-color: #4a5568;
+        border-left-color: #9f7aea;
+        color: #e2e8f0;
+      }
+      body.dark-mode .bg-gray-50 { /* Para los divs de resultados */
+        background-color: #4a5568;
+        border-color: #667eea;
+      }
+      body.dark-mode .text-gray-500 {
+        color: #a0aec0;
+      }
+      body.dark-mode .credit {
+        background: rgba(0,0,0,0.3);
+        border-color: rgba(255,255,255,0.1);
+        box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+      }
+      body.dark-mode #clearSearchBtn, body.dark-mode #clearDeduplicateBtn {
+        background-color: #667eea;
+        color: #e2e8f0;
+      }
+      body.dark-mode #clearSearchBtn:hover, body.dark-mode #clearDeduplicateBtn:hover {
+        background-color: #764ba2;
+        color: #e2e8f0;
+      }
+      body.dark-mode .status-message.red { background-color: #4a1c1c; color: #ef4444; border-color: #b91c1c; }
+      body.dark-mode .status-message.yellow { background-color: #4a3200; color: #fbbf24; border-color: #d97706; }
+      body.dark-mode .status-message.green { background-color: #1c4a1c; color: #4ade80; border-color: #16a34a; }
+
+
       .hero-icon {
-        color: #667eea;
-        font-size: 3rem;
-        margin-bottom: 1rem;
+        color: #667eea; /* Mantener el color principal */
+        font-size: 3.5rem; /* Ligeramente más grande */
+        margin-bottom: 1.5rem; /* Más espacio */
+        text-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Sombra sutil */
       }
       .result-line {
         font-family: "Courier New", monospace;
+        background-color: #f8f8f8; /* Fondo ligeramente diferente para el código */
+        border-left: 4px solid #667eea; /* Borde izquierdo para destacar */
+        padding: 0.75rem 1rem; /* Ajustar padding */
+        border-radius: 6px; /* Bordes redondeados */
+        box-shadow: inset 0 1px 3px rgba(0,0,0,0.05); /* Sombra interna sutil */
+        word-break: break-all; /* Romper palabras largas */
       }
       .credit {
         max-width: 400px;
-        margin: 0 auto;
-        background: rgba(255 255 255 / 0.15);
-        backdrop-filter: blur(8px);
-        border-radius: 12px;
-        padding: 1rem 1.5rem;
-        color: #f3f4f6;
-        font-size: 0.9rem;
-        font-weight: 600;
+        margin: 2rem auto 0; /* Más margen superior */
+        background: rgba(255 255 255 / 0.2); /* Fondo más transparente */
+        backdrop-filter: blur(10px); /* Blur más pronunciado */
+        border-radius: 16px; /* Bordes más redondeados */
+        padding: 1.2rem 1.8rem; /* Más padding */
+        color: #e0e7ff; /* Color de texto más claro */
+        font-size: 0.95rem; /* Ligeramente más grande */
+        font-weight: 500; /* Peso de fuente ajustado */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem; /* Más espacio entre elementos */
+        box-shadow: 0 6px 20px rgba(118, 75, 162, 0.3); /* Sombra más pronunciada */
+        user-select: none;
+        border: 1px solid rgba(255,255,255,0.3); /* Borde sutil */
+        transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+      }
+      .credit svg {
+        filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.4)); /* Sombra más fuerte para el SVG */
+      }
+      /* Estilos para los contenedores principales */
+      .main-card {
+        background: #ffffff;
+        border-radius: 20px; /* Bordes más redondeados */
+        box-shadow: 0 10px 30px rgba(0,0,0,0.15); /* Sombra más suave y extendida */
+        padding: 2.5rem; /* Más padding */
+        border: 1px solid #f0f0f0; /* Borde sutil */
+        transition: background-color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+      }
+      /* Mejoras en los inputs */
+      input[type="text"] {
+        border-radius: 10px; /* Bordes más redondeados */
+        padding: 0.8rem 1rem; /* Ajustar padding */
+        border: 1px solid #e0e0e0; /* Borde más suave */
+        transition: all 0.3s ease;
+      }
+      input[type="text"]:focus {
+        border-color: #667eea; /* Color de enfoque principal */
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2); /* Anillo de enfoque suave */
+      }
+      /* Estilo para input type="file" */
+      input[type="file"] {
+        border-radius: 10px;
+        border: 1px solid #e0e0e0;
+        padding: 0.5rem; /* Ajustar padding para que el botón interno no se vea afectado */
+        transition: all 0.3s ease;
+      }
+      input[type="file"]::-webkit-file-upload-button {
+        background-color: #667eea;
+        color: white;
+        padding: 0.6rem 1.2rem;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+      input[type="file"]:hover::-webkit-file-upload-button {
+        background-color: #764ba2;
+      }
+
+      /* Mejoras en los botones */
+      button {
+        border-radius: 10px; /* Bordes más redondeados */
+        padding: 0.9rem 2.2rem; /* Ajustar padding */
+        font-weight: 600; /* Peso de fuente más fuerte */
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* Sombra para botones */
+      }
+      button:hover {
+        transform: translateY(-2px); /* Efecto hover sutil */
+        box-shadow: 0 6px 20px rgba(0,0,0,0.15); /* Sombra más pronunciada en hover */
+      }
+      button:disabled {
+        box-shadow: none; /* Sin sombra cuando está deshabilitado */
+        transform: none; /* Sin transformación cuando está deshabilitado */
+      }
+      /* Estilos específicos para el botón de limpiar */
+      #clearSearchBtn, #clearDeduplicateBtn {
+        background-color: #e0e0e0; /* Un gris más claro */
+        color: #555; /* Texto más oscuro */
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      }
+      #clearSearchBtn:hover, #clearDeduplicateBtn:hover {
+        background-color: #d0d0d0;
+        color: #333;
+      }
+      /* Mensajes de estado */
+      .status-message {
+        padding: 1rem;
+        border-radius: 10px;
+        margin-top: 1rem;
+        font-weight: 500;
         display: flex;
         align-items: center;
         justify-content: center;
         gap: 0.5rem;
-        box-shadow: 0 4px 15px rgba(118, 75, 162, 0.4);
-        user-select: none;
+        transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
       }
-      .credit img {
-        width: 20px;
+      .status-message.red {
+        background-color: #fee2e2; /* red-100 */
+        color: #dc2626; /* red-600 */
+        border: 1px solid #fca5a5; /* red-300 */
+      }
+      .status-message.yellow {
+        background-color: #fffbeb; /* yellow-100 */
+        color: #d97706; /* yellow-600 */
+        border: 1px solid #fcd34d; /* yellow-300 */
+      }
+      .status-message.green {
+        background-color: #dcfce7; /* green-100 */
+        color: #16a34a; /* green-600 */
+        border: 1px solid #86efac; /* green-300 */
+      }
+
+      /* Drag and Drop Area */
+      .drop-area {
+        border: 2px dashed #a0aec0;
+        border-radius: 10px;
+        padding: 1.5rem;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-top: 0.5rem;
+      }
+      .drop-area.highlight {
+        border-color: #667eea;
+        background-color: #e0e7ff; /* blue-100 */
+      }
+      body.dark-mode .drop-area.highlight {
+        background-color: #4a5568;
+        border-color: #9f7aea;
+      }
+      .drop-area p {
+        margin-top: 0.5rem;
+        font-size: 0.9rem;
+        color: #718096;
+      }
+      body.dark-mode .drop-area p {
+        color: #a0aec0;
+      }
+
+      /* Progress Bar */
+      .progress-container {
+        width: 100%;
+        background-color: #e2e8f0;
+        border-radius: 5px;
+        margin-top: 1rem;
+        overflow: hidden;
         height: 20px;
-        filter: drop-shadow(0 0 1px rgba(0, 0, 0, 0.3));
+        display: none; /* Oculto por defecto */
+      }
+      body.dark-mode .progress-container {
+        background-color: #4a5568;
+      }
+      .progress-bar {
+        height: 100%;
+        width: 0%;
+        background-color: #667eea;
+        border-radius: 5px;
+        text-align: center;
+        color: white;
+        font-size: 0.8rem;
+        line-height: 20px;
+        transition: width 0.1s ease;
+      }
+      .progress-text {
+        margin-top: 0.5rem;
+        font-size: 0.9rem;
+        text-align: center;
+        color: #718096;
+        display: none; /* Oculto por defecto */
+      }
+      body.dark-mode .progress-text {
+        color: #a0aec0;
+      }
+
+      /* Toggle Switch for Dark Mode */
+      .switch {
+        position: relative;
+        display: inline-block;
+        width: 40px;
+        height: 20px;
+      }
+      .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        transition: .4s;
+        border-radius: 20px;
+      }
+      .slider:before {
+        position: absolute;
+        content: "";
+        height: 16px;
+        width: 16px;
+        left: 2px;
+        bottom: 2px;
+        background-color: white;
+        transition: .4s;
+        border-radius: 50%;
+      }
+      input:checked + .slider {
+        background-color: #667eea;
+      }
+      input:focus + .slider {
+        box-shadow: 0 0 1px #667eea;
+      }
+      input:checked + .slider:before {
+        transform: translateX(20px);
+      }
+      .dark-mode-toggle {
+        position: absolute;
+        top: 1.5rem;
+        right: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: #e0e7ff;
+        font-size: 0.9rem;
+        font-weight: 500;
+      }
+      body.dark-mode .dark-mode-toggle {
+        color: #a0aec0;
+      }
+
+      /* AUMENTO DEL TAMAÑO DEL ÁREA DE RESULTADOS */
+      #results, #deduplicateResults {
+        max-height: 500px; /* Aumenta la altura máxima a 500px */
+        /* Puedes probar con 600px si necesitas aún más espacio */
       }
     </style>
 </head>
-<body class="min-h-screen flex flex-col items-center justify-center py-8 px-4">
-    <div
-      class="bg-white rounded-xl shadow-2xl p-10 max-w-3xl w-full mb-8"
-    >
+<body class="min-h-screen flex flex-col items-center justify-center py-10 px-4">
+
+    <div class="dark-mode-toggle">
+        <i class="fas fa-sun"></i>
+        <label class="switch">
+            <input type="checkbox" id="darkModeToggle">
+            <span class="slider"></span>
+        </label>
+        <i class="fas fa-moon"></i>
+    </div>
+
+    <div class="main-card max-w-3xl w-full mb-10">
       <div class="text-center mb-8">
         <i class="fas fa-search hero-icon"></i>
         <h1 class="text-4xl font-bold text-gray-800 mb-2">ULPCHK</h1>
-        <p class="text-gray-600">Ingresar archivos ULP (Url:Log:Pass)</p>
+        <p class="text-gray-600 text-lg">Herramienta para procesar archivos ULP (Url:Log:Pass)</p>
       </div>
 
       <div class="mb-6">
@@ -70,6 +375,10 @@
           accept=".txt"
           class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 transition duration-300"
         />
+        <div id="searchDropArea" class="drop-area">
+            <i class="fas fa-cloud-upload-alt text-4xl text-gray-400"></i>
+            <p>Arrastra y suelta tu archivo TXT aquí</p>
+        </div>
       </div>
 
       <div class="mb-6">
@@ -77,12 +386,12 @@
           for="keywordInput"
           class="block text-sm font-medium text-gray-700 mb-2 flex items-center"
         >
-          <i class="fas fa-keyboard mr-2 text-green-500"></i> Palabra clave:
+          <i class="fas fa-keyboard mr-2 text-green-500"></i> Palabra clave para buscar:
         </label>
         <input
           type="text"
           id="keywordInput"
-          placeholder="Ingresa la palabra clave"
+          placeholder="Ej: gmail.com, password123"
           class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-300"
         />
       </div>
@@ -105,14 +414,26 @@
       </div>
       <!-- FIN CASILLA -->
 
-      <div class="flex justify-center mb-6">
+      <div class="flex justify-center mb-6 gap-4">
         <button
           id="searchBtn"
           class="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold py-3 px-8 rounded-lg transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-105"
         >
           <i class="fas fa-search mr-2"></i>Buscar
         </button>
+        <button
+            id="clearSearchBtn"
+            class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-3 px-8 rounded-lg transition duration-300"
+            style="display: none;"
+        >
+            <i class="fas fa-times mr-2"></i>Limpiar
+        </button>
       </div>
+
+      <div id="searchProgressBarContainer" class="progress-container">
+          <div id="searchProgressBar" class="progress-bar">0%</div>
+      </div>
+      <p id="searchProgressText" class="progress-text">Leyendo archivo...</p>
 
       <div id="downloadSection" class="mb-6 text-center" style="display: none">
         <button
@@ -125,20 +446,18 @@
 
       <div
         id="results"
-        class="bg-gray-50 p-4 rounded-md min-h-32 border border-gray-200"
+        class="bg-gray-50 p-4 rounded-md min-h-32 border border-gray-200 overflow-auto"
       >
         <p class="text-gray-500 text-center">Los resultados aparecerán aquí...</p>
       </div>
     </div>
 
     <!-- SECCIÓN PARA ELIMINAR DUPLICADOS -->
-    <div
-      class="bg-white rounded-xl shadow-2xl p-10 max-w-3xl w-full mt-8"
-    >
+    <div class="main-card max-w-3xl w-full mt-8">
       <div class="text-center mb-8">
         <i class="fas fa-eraser hero-icon" style="color: #ef4444;"></i>
         <h2 class="text-3xl font-bold text-gray-800 mb-2">Eliminar Duplicados</h2>
-        <p class="text-gray-600">Sube un archivo TXT para eliminar líneas duplicadas.</p>
+        <p class="text-gray-600 text-lg">Sube un archivo TXT para eliminar líneas duplicadas.</p>
       </div>
 
       <div class="mb-6">
@@ -154,6 +473,10 @@
           accept=".txt"
           class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-red-50 file:text-red-700 hover:file:bg-red-100 transition duration-300"
         />
+        <div id="deduplicateDropArea" class="drop-area">
+            <i class="fas fa-cloud-upload-alt text-4xl text-gray-400"></i>
+            <p>Arrastra y suelta tu archivo TXT aquí</p>
+        </div>
       </div>
 
       <!-- CASILLA PARA EL NOMBRE DEL ARCHIVO DE RESULTADOS DE DUPLICADOS -->
@@ -174,16 +497,28 @@
       </div>
       <!-- FIN CASILLA -->
 
-      <div class="flex justify-center mb-6">
+      <div class="flex justify-center mb-6 gap-4">
         <button
           id="deduplicateBtn"
           class="bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700 text-white font-bold py-3 px-8 rounded-lg transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-105"
         >
           <i class="fas fa-magic mr-2"></i>Limpiar Duplicados
         </button>
+        <button
+            id="clearDeduplicateBtn"
+            class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-3 px-8 rounded-lg transition duration-300"
+            style="display: none;"
+        >
+            <i class="fas fa-times mr-2"></i>Limpiar
+        </button>
       </div>
 
-      <div id="deduplicateResults" class="bg-gray-50 p-4 rounded-md min-h-32 border border-gray-200">
+      <div id="deduplicateProgressBarContainer" class="progress-container">
+          <div id="deduplicateProgressBar" class="progress-bar">0%</div>
+      </div>
+      <p id="deduplicateProgressText" class="progress-text">Leyendo archivo...</p>
+
+      <div id="deduplicateResults" class="bg-gray-50 p-4 rounded-md min-h-32 border border-gray-200 overflow-auto">
         <p class="text-gray-500 text-center">Los resultados de la limpieza aparecerán aquí...</p>
       </div>
     </div>
@@ -212,221 +547,4 @@
     <script>
       let matchingLines = [];
 
-      // --- Lógica para la búsqueda de palabras clave ---
-      document
-        .getElementById("searchBtn")
-        .addEventListener("click", function () {
-          const fileInput = document.getElementById("fileInput");
-          const keyword = document
-            .getElementById("keywordInput")
-            .value.trim()
-            .toLowerCase();
-          const outputFileName = document
-            .getElementById("outputFileNameInput")
-            .value.trim();
-
-          const resultsDiv = document.getElementById("results");
-          const searchBtn = document.getElementById("searchBtn");
-
-          if (!fileInput.files[0]) {
-            resultsDiv.innerHTML =
-              '<p class="text-red-500 text-center"><i class="fas fa-exclamation-triangle mr-2"></i>Por favor, selecciona un archivo TXT.</p>';
-            return;
-          }
-
-          if (!keyword) {
-            resultsDiv.innerHTML =
-              '<p class="text-red-500 text-center"><i class="fas fa-exclamation-triangle mr-2"></i>Por favor, ingresa una palabra clave.</p>';
-            return;
-          }
-
-          searchBtn.disabled = true;
-          searchBtn.innerHTML =
-            '<i class="fas fa-spinner fa-spin mr-2"></i>Buscando...';
-
-          const file = fileInput.files[0];
-          const reader = new FileReader();
-
-          reader.onload = function (e) {
-            const text = e.target.result;
-            const lines = text.split("\n");
-            matchingLines = lines.filter((line) =>
-              line.toLowerCase().includes(keyword)
-            );
-
-            if (matchingLines.length > 0) {
-              resultsDiv.innerHTML =
-                '<h3 class="text-lg font-semibold mb-4 text-gray-800 flex items-center"><i class="fas fa-list mr-2 text-blue-500"></i>Líneas encontradas (' +
-                matchingLines.length +
-                "):</h3>" +
-                matchingLines
-                  .map(
-                    (line, index) =>
-                      `<div class="mb-3"><pre class="bg-white p-3 rounded border text-sm overflow-auto result-line">${index + 1}. ${line}</pre></div>`
-                  )
-                  .join("");
-
-              document.getElementById("downloadSection").style.display = "block";
-              document.getElementById("downloadBtn").onclick = function () {
-                const blob = new Blob([matchingLines.join("\n")], {
-                  type: "text/plain",
-                });
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement("a");
-                a.href = url;
-
-                let finalFileName = "resultados_ULPCHK.txt";
-                if (outputFileName) {
-                  finalFileName = outputFileName.endsWith(".txt") ? outputFileName : `${outputFileName}.txt`;
-                } else if (keyword) {
-                  finalFileName = `resultados_ULPCHK_${keyword}.txt`;
-                }
-                
-                a.download = finalFileName;
-                
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                URL.revokeObjectURL(url);
-              };
-            } else {
-              resultsDiv.innerHTML =
-                '<p class="text-yellow-500 text-center"><i class="fas fa-search-minus mr-2"></i>No se encontraron líneas que contengan la palabra clave.</p>';
-              document.getElementById("downloadSection").style.display = "none";
-            }
-
-            searchBtn.disabled = false;
-            searchBtn.innerHTML = '<i class="fas fa-search mr-2"></i>Buscar';
-          };
-
-          reader.onerror = function () {
-            resultsDiv.innerHTML =
-              '<p class="text-red-500 text-center"><i class="fas fa-exclamation-triangle mr-2"></i>Error al leer el archivo.</p>';
-            searchBtn.disabled = false;
-            searchBtn.innerHTML = '<i class="fas fa-search mr-2"></i>Buscar';
-            document.getElementById("downloadSection").style.display = "none";
-          };
-
-          reader.readAsText(file);
-        });
-
-      // --- Lógica para habilitar/deshabilitar el botón de búsqueda ---
-      document.getElementById("fileInput").addEventListener("change", toggleButton);
-      document.getElementById("keywordInput").addEventListener("input", toggleButton);
-
-      function toggleButton() {
-        const fileSelected = document.getElementById("fileInput").files.length > 0;
-        const keywordEntered = document.getElementById("keywordInput").value.trim() !== "";
-        document.getElementById("searchBtn").disabled = !(fileSelected && keywordEntered);
-      }
-
-      // --- LÓGICA PARA ELIMINAR DUPLICADOS ---
-      document.getElementById("deduplicateBtn").addEventListener("click", function () {
-        const deduplicateFileInput = document.getElementById("deduplicateFileInput");
-        const deduplicateResultsDiv = document.getElementById("deduplicateResults");
-        const deduplicateBtn = document.getElementById("deduplicateBtn");
-        // Obtener el nombre de archivo deseado por el usuario para la deduplicación
-        const outputDeduplicateFileName = document
-            .getElementById("outputDeduplicateFileNameInput")
-            .value.trim();
-
-        if (!deduplicateFileInput.files[0]) {
-          deduplicateResultsDiv.innerHTML =
-            '<p class="text-red-500 text-center"><i class="fas fa-exclamation-triangle mr-2"></i>Por favor, selecciona un archivo TXT para eliminar duplicados.</p>';
-          return;
-        }
-
-        deduplicateBtn.disabled = true;
-        deduplicateBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Limpiando...';
-
-        const file = deduplicateFileInput.files[0];
-        const reader = new FileReader();
-
-        reader.onload = function (e) {
-          const text = e.target.result;
-          const lines = text.split("\n");
-          
-          const originalLines = []; // Para almacenar todas las líneas originales (no vacías)
-          const uniqueNormalizedLines = new Set(); // Para almacenar las versiones normalizadas únicas
-          const finalUniqueLines = []; // Para almacenar las líneas únicas en su formato original
-
-          lines.forEach(line => {
-            const trimmedLine = line.trim();
-            if (trimmedLine === '') { // Ignorar líneas completamente vacías
-                return;
-            }
-            originalLines.push(line); // Guardar la línea original para el conteo
-            const normalizedLine = trimmedLine.toLowerCase(); // Normalizar para comparación
-
-            if (!uniqueNormalizedLines.has(normalizedLine)) {
-              uniqueNormalizedLines.add(normalizedLine);
-              finalUniqueLines.push(line); // Añadir la línea original si su versión normalizada es única
-            }
-          });
-
-          const originalCount = originalLines.length; // Contar las líneas no vacías originales
-          const uniqueCount = finalUniqueLines.length;
-          const removedCount = originalCount - uniqueCount;
-
-          if (uniqueCount > 0) {
-            deduplicateResultsDiv.innerHTML =
-              `<h3 class="text-lg font-semibold mb-4 text-gray-800 flex items-center"><i class="fas fa-check-circle mr-2 text-green-500"></i>Proceso Completado:</h3>
-              <p class="text-gray-700 mb-2">Líneas originales (no vacías): <span class="font-bold">${originalCount}</span></p>
-              <p class="text-gray-700 mb-4">Líneas únicas: <span class="font-bold">${uniqueCount}</span> (Se eliminaron <span class="font-bold text-red-600">${removedCount}</span> duplicados)</p>
-              <div class="text-center">
-                <button id="downloadUniqueBtn" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-lg transition duration-300">
-                  <i class="fas fa-download mr-2"></i>Descargar Archivo Limpio
-                </button>
-              </div>`;
-
-            document.getElementById("downloadUniqueBtn").onclick = function () {
-              const blob = new Blob([finalUniqueLines.join("\n")], {
-                type: "text/plain",
-              });
-              const url = URL.createObjectURL(blob);
-              const a = document.createElement("a");
-              a.href = url;
-              
-              // Determinar el nombre del archivo de descarga para deduplicados
-              let finalDeduplicateFileName = `ULPCHK_limpio_${file.name.replace(/\.txt$/i, '')}.txt`; // Nombre por defecto
-              if (outputDeduplicateFileName) {
-                // Si el usuario proporcionó un nombre, usarlo y asegurar la extensión .txt
-                finalDeduplicateFileName = outputDeduplicateFileName.endsWith(".txt") ? outputDeduplicateFileName : `${outputDeduplicateFileName}.txt`;
-              }
-              
-              a.download = finalDeduplicateFileName;
-              
-              document.body.appendChild(a);
-              a.click();
-              document.body.removeChild(a);
-              URL.revokeObjectURL(url);
-            };
-          } else {
-            deduplicateResultsDiv.innerHTML =
-              '<p class="text-yellow-500 text-center"><i class="fas fa-info-circle mr-2"></i>El archivo está vacío o no contiene líneas válidas después de la limpieza.</p>';
-          }
-
-          deduplicateBtn.disabled = false;
-          deduplicateBtn.innerHTML = '<i class="fas fa-magic mr-2"></i>Limpiar Duplicados';
-        };
-
-        reader.onerror = function () {
-          deduplicateResultsDiv.innerHTML =
-            '<p class="text-red-500 text-center"><i class="fas fa-exclamation-triangle mr-2"></i>Error al leer el archivo.</p>';
-          deduplicateBtn.disabled = false;
-          deduplicateBtn.innerHTML = '<i class="fas fa-magic mr-2"></i>Limpiar Duplicados';
-        };
-
-        reader.readAsText(file);
-      });
-
-      // Habilitar/deshabilitar el botón de deduplicación
-      document.getElementById("deduplicateFileInput").addEventListener("change", function() {
-        document.getElementById("deduplicateBtn").disabled = this.files.length === 0;
-      });
-      // Inicialmente deshabilitar el botón de deduplicación
-      document.getElementById("deduplicateBtn").disabled = true;
-
-    </script>
-</body>
-</html>
+      // --- Dar
